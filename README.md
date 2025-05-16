@@ -15,7 +15,7 @@ A financial planning tool built with React to help people in Bangladesh calculat
 
 ## Live Demo
 
-Visit the live demo: [Bangladesh Retirement Calculator](https://yourusername.github.io/bangladesh-retirement-calculator)
+Visit the live demo: [Bangladesh Retirement Calculator](https://hamimul.github.io/bangladesh-retirement-calculator/)
 
 ## Getting Started
 
@@ -28,7 +28,7 @@ Visit the live demo: [Bangladesh Retirement Calculator](https://yourusername.git
 
 1. Clone the repository
 ```bash
-git clone https://github.com/yourusername/bangladesh-retirement-calculator.git
+git clone https://github.com/hamimul/bangladesh-retirement-calculator.git
 cd bangladesh-retirement-calculator
 ```
 
