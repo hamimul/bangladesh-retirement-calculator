@@ -1,0 +1,226 @@
+/* RetirementCalculator.css */
+.calculator-container {
+  padding: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.calculator-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: #1d4ed8;
+}
+
+.calculator-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .calculator-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.input-section, .results-section {
+  background-color: #f9fafb;
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+
+.section-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.input-group {
+  margin-bottom: 1rem;
+}
+
+.input-group label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.25rem;
+}
+
+.helper-text {
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin-top: 0.25rem;
+}
+
+.savings-rate {
+  padding: 0.5rem;
+  background-color: #eff6ff;
+  border: 1px solid #d1d5db;
+  border-radius: 0.25rem;
+}
+
+.button-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.depletion-button {
+  width: 100%;
+  background-color: #2563eb;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  border: none;
+  cursor: pointer;
+}
+
+.depletion-button:hover {
+  background-color: #1d4ed8;
+}
+
+.safe-age-button {
+  width: 100%;
+  background-color: #059669;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  border: none;
+  cursor: pointer;
+}
+
+.safe-age-button:hover {
+  background-color: #047857;
+}
+
+.projection-container {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background-color: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  border-radius: 0.5rem;
+}
+
+.projection-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #047857;
+}
+
+.retirement-age {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0.5rem 0;
+}
+
+.depletion-alert {
+  margin-top: 0.75rem;
+  padding: 0.75rem;
+  background-color: #fee2e2;
+  border-radius: 0.5rem;
+  border: 1px solid #fecaca;
+}
+
+.success-alert {
+  margin-top: 0.75rem;
+  padding: 0.75rem;
+  background-color: #ecfdf5;
+  border-radius: 0.5rem;
+  border: 1px solid #a7f3d0;
+}
+
+.alert-text {
+  color: inherit;
+  font-weight: 700;
+}
+
+.alert-subtext {
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+.recalculate-button {
+  margin-top: 0.75rem;
+  background-color: #dc2626;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  border: none;
+  cursor: pointer;
+}
+
+.recalculate-button:hover {
+  background-color: #b91c1c;
+}
+
+.analysis-container {
+  margin-top: 0.75rem;
+  padding: 0.75rem;
+  background-color: #eff6ff;
+  border-radius: 0.5rem;
+}
+
+.analysis-title {
+  font-weight: 700;
+  color: #1e40af;
+}
+
+.analysis-item {
+  margin: 0.25rem 0;
+}
+
+.item-label {
+  font-weight: 500;
+}
+
+.table-container {
+  overflow: auto;
+  max-height: 24rem;
+}
+
+.results-table {
+  min-width: 100%;
+  border-collapse: collapse;
+}
+
+.results-table th, .results-table td {
+  padding: 0.5rem;
+  border: 1px solid #d1d5db;
+}
+
+.results-table th {
+  background-color: #f3f4f6;
+}
+
+.depleted-row {
+  background-color: #fee2e2;
+}
+
+.retired-row {
+  background-color: #dbeafe;
+}
+
+.transition-row {
+  background-color: #d1fae5;
+}
+
+.no-results {
+  padding: 1rem;
+  background-color: #f3f4f6;
+  text-align: center;
+  border-radius: 0.25rem;
+}
