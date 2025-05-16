@@ -2,7 +2,6 @@
 
 A financial planning tool built with React to help people in Bangladesh calculate when they can retire based on their current financial situation.
 
-![Screenshot of the Bangladesh Retirement Calculator](screenshot.png)
 
 ## Features
 
