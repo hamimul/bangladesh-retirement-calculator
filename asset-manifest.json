@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/hamimul/bangladesh-retirement-calculator/static/css/main.b51c600d.css",
-    "main.js": "/hamimul/bangladesh-retirement-calculator/static/js/main.76266ac9.js",
-    "index.html": "/hamimul/bangladesh-retirement-calculator/index.html",
-    "main.b51c600d.css.map": "/hamimul/bangladesh-retirement-calculator/static/css/main.b51c600d.css.map",
-    "main.76266ac9.js.map": "/hamimul/bangladesh-retirement-calculator/static/js/main.76266ac9.js.map"
+    "main.css": "/bangladesh-retirement-calculator/static/css/main.b51c600d.css",
+    "main.js": "/bangladesh-retirement-calculator/static/js/main.76266ac9.js",
+    "index.html": "/bangladesh-retirement-calculator/index.html",
+    "main.b51c600d.css.map": "/bangladesh-retirement-calculator/static/css/main.b51c600d.css.map",
+    "main.76266ac9.js.map": "/bangladesh-retirement-calculator/static/js/main.76266ac9.js.map"
   },
   "entrypoints": [
     "static/css/main.b51c600d.css",
