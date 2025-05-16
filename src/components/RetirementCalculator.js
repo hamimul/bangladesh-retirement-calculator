@@ -410,14 +410,4 @@ const RetirementCalculator = () => {
   );
 };
 
-export default RetirementCalculator;() => {
-                setShowDepletion(true);
-                calculateRetirement(manualRetirementAge);
-              }}
-              className="depletion-button"
-            >
-              Show Depletion
-            </button>
-            
-            <button
-              onClick={
+export default RetirementCalculator;
