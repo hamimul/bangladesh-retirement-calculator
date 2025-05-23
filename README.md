@@ -12,6 +12,13 @@ A financial planning tool built with React to help people in Bangladesh calculat
 - Year-by-year breakdown of financial projections
 - Responsive design for desktop and mobile
 
+All new features included:
+- Retirement corpus calculation
+- Required monthly investment
+- Visual comparison between current vs required savings
+- Corpus projection analysis
+- Shortfall/surplus indicators
+
 ## Live Demo
 
 Visit the live demo: [Bangladesh Retirement Calculator](https://hamimul.github.io/bangladesh-retirement-calculator/)
