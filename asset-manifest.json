@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/bangladesh-retirement-calculator/static/css/main.b51c600d.css",
-    "main.js": "/bangladesh-retirement-calculator/static/js/main.91f5b2f8.js",
+    "main.js": "/bangladesh-retirement-calculator/static/js/main.ba6b4232.js",
     "index.html": "/bangladesh-retirement-calculator/index.html",
     "main.b51c600d.css.map": "/bangladesh-retirement-calculator/static/css/main.b51c600d.css.map",
-    "main.91f5b2f8.js.map": "/bangladesh-retirement-calculator/static/js/main.91f5b2f8.js.map"
+    "main.ba6b4232.js.map": "/bangladesh-retirement-calculator/static/js/main.ba6b4232.js.map"
   },
   "entrypoints": [
     "static/css/main.b51c600d.css",
-    "static/js/main.91f5b2f8.js"
+    "static/js/main.ba6b4232.js"
   ]
 }
