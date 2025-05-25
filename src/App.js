@@ -15,8 +15,12 @@ function App() {
       <footer className="App-footer">
         <p>© {new Date().getFullYear()} Bangladesh Retirement Calculator</p>
         <p>
-          <a href="https://github.com/hamimul/bangladesh-retirement-calculator/blob/master/public/index.html" target="_blank" rel="noopener noreferrer">
+          <a href="https://github.com/hamimul/bangladesh-retirement-calculator" target="_blank" rel="noopener noreferrer">
             View on GitHub
+          </a>
+          {' | '}
+          <a href="https://www.linkedin.com/in/hamimul" target="_blank" rel="noopener noreferrer">
+            Connect on LinkedIn
           </a>
         </p>
       </footer>

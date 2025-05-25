@@ -11,10 +11,10 @@ const RetirementCalculator = () => {
   const [investmentReturnRate, setInvestmentReturnRate] = useState(7);
   const [investmentStepUpRate, setInvestmentStepUpRate] = useState(10);
   const [targetAge, setTargetAge] = useState(85);
+  const [currentInvestment, setCurrentInvestment] = useState(0); // New field for existing investments
   const [savingsRate, setSavingsRate] = useState(
     Math.round(((currentSalary - currentExpenses) / currentSalary) * 100)
   );
-  const [manualRetirementAge, setManualRetirementAge] = useState(null);
   const [showDepletion, setShowDepletion] = useState(true);
   
   // New inputs for corpus calculation
@@ -39,7 +39,7 @@ const RetirementCalculator = () => {
     let age = currentAge;
     let salary = currentSalary;
     let expenses = currentExpenses;
-    let investments = 0;
+    let investments = currentInvestment; // Start with existing investments
     let annualContribution = salary - expenses;
     let data = [];
     let retirementYearData = null;
@@ -51,6 +51,8 @@ const RetirementCalculator = () => {
       
       investments = investments * (1 + investmentReturnRate / 100) + totalContribution;
       
+      const isFirstYear = age === currentAge && currentInvestment > 0;
+      
       data.push({
         age,
         salary: Math.round(salary),
@@ -59,7 +61,8 @@ const RetirementCalculator = () => {
         additionalInvestment: Math.round(Math.max(0, totalContribution - baseSavings)),
         totalContribution: Math.round(totalContribution),
         investments: Math.round(investments),
-        passiveIncome: Math.round(investments * (investmentReturnRate / 100))
+        passiveIncome: Math.round(investments * (investmentReturnRate / 100)),
+        isFirstYear: isFirstYear
       });
       
       salary = salary * (1 + salaryGrowthRate / 100);
@@ -156,26 +159,34 @@ const RetirementCalculator = () => {
     // Calculate required corpus using withdrawal rate
     const requiredCorpus = expensesAtRetirement * (100 / withdrawalRate);
     
+    // Calculate what current investment will grow to
+    const currentInvestmentFutureValue = currentInvestment * Math.pow(1 + investmentReturnRate / 100, yearsToRetirement);
+    
+    // Calculate remaining corpus needed after accounting for current investment growth
+    const remainingCorpusNeeded = Math.max(0, requiredCorpus - currentInvestmentFutureValue);
+    
     // Calculate required monthly investment using future value formula
     const monthlyRate = investmentReturnRate / 100 / 12;
     const monthsToRetirement = yearsToRetirement * 12;
     
     // Account for step-up rate
     let requiredMonthlyInvestment;
-    if (investmentStepUpRate > 0) {
+    if (remainingCorpusNeeded === 0) {
+      requiredMonthlyInvestment = 0;
+    } else if (investmentStepUpRate > 0) {
       // Complex calculation with step-up
       const avgGrowthFactor = Math.pow(1 + investmentStepUpRate / 100, yearsToRetirement / 2);
       const futureValueFactor = (Math.pow(1 + monthlyRate, monthsToRetirement) - 1) / monthlyRate;
-      requiredMonthlyInvestment = requiredCorpus / (futureValueFactor * avgGrowthFactor);
+      requiredMonthlyInvestment = remainingCorpusNeeded / (futureValueFactor * avgGrowthFactor);
     } else {
       // Simple calculation without step-up
       const futureValueFactor = (Math.pow(1 + monthlyRate, monthsToRetirement) - 1) / monthlyRate;
-      requiredMonthlyInvestment = requiredCorpus / futureValueFactor;
+      requiredMonthlyInvestment = remainingCorpusNeeded / futureValueFactor;
     }
     
     // Calculate what corpus current savings will generate
     const currentMonthlySavings = (currentSalary - currentExpenses) / 12;
-    let projectedCorpus = 0;
+    let projectedCorpus = currentInvestment; // Start with existing investment
     let monthlyContribution = currentMonthlySavings;
     
     for (let month = 0; month < monthsToRetirement; month++) {
@@ -191,6 +202,8 @@ const RetirementCalculator = () => {
       yearsToRetirement,
       expensesAtRetirement: Math.round(expensesAtRetirement),
       requiredCorpus: Math.round(requiredCorpus),
+      currentInvestmentFutureValue: Math.round(currentInvestmentFutureValue),
+      remainingCorpusNeeded: Math.round(remainingCorpusNeeded),
       requiredMonthlyInvestment: Math.round(requiredMonthlyInvestment),
       requiredAnnualInvestment: Math.round(requiredMonthlyInvestment * 12),
       currentMonthlySavings: Math.round(currentMonthlySavings),
@@ -237,6 +250,16 @@ const RetirementCalculator = () => {
           </div>
           
           <div className="input-group">
+            <label>Current Investment/Savings (৳)</label>
+            <input
+              type="number"
+              value={currentInvestment}
+              onChange={(e) => setCurrentInvestment(Number(e.target.value))}
+            />
+            <p className="helper-text">Your existing investments, savings, or retirement fund</p>
+          </div>
+          
+          <div className="input-group">
             <label>Salary Growth Rate (%)</label>
             <input
               type="number"
@@ -270,6 +293,15 @@ const RetirementCalculator = () => {
               type="number"
               value={investmentStepUpRate}
               onChange={(e) => setInvestmentStepUpRate(Number(e.target.value))}
+            />
+          </div>
+          
+          <div className="input-group">
+            <label>Target Age for Sustainability</label>
+            <input
+              type="number"
+              value={targetAge}
+              onChange={(e) => setTargetAge(Number(e.target.value))}
             />
           </div>
           
@@ -313,7 +345,7 @@ const RetirementCalculator = () => {
             <button
               onClick={() => {
                 setShowDepletion(true);
-                calculateRetirement(manualRetirementAge);
+                calculateRetirement();
               }}
               className="depletion-button"
             >
@@ -349,6 +381,13 @@ const RetirementCalculator = () => {
                   <span>Required Retirement Corpus:</span> ৳{corpusResults.requiredCorpus.toLocaleString()}
                 </div>
                 
+                {currentInvestment > 0 && (
+                  <div className="analysis-item" style={{color: '#059669'}}>
+                    <span className="item-label">Current Investment Growth:</span> ৳{corpusResults.currentInvestmentFutureValue.toLocaleString()}
+                    <p className="helper-text">Your ৳{currentInvestment.toLocaleString()} will grow to this amount</p>
+                  </div>
+                )}
+                
                 <hr style={{margin: '0.5rem 0'}} />
                 
                 <div style={{backgroundColor: '#fff', padding: '0.75rem', borderRadius: '0.375rem', border: '1px solid #e5e7eb', marginBottom: '0.5rem'}}>
@@ -357,6 +396,14 @@ const RetirementCalculator = () => {
                     <span className="item-label">Required Monthly Investment:</span>
                     <span style={{fontWeight: '700', color: '#059669', fontSize: '1.125rem'}}> ৳{corpusResults.requiredMonthlyInvestment.toLocaleString()}</span>
                   </div>
+                  
+                  {currentInvestment > 0 && corpusResults.requiredMonthlyInvestment === 0 && (
+                    <div className="success-alert" style={{marginTop: '0.5rem', padding: '0.5rem'}}>
+                      <p style={{color: '#047857', fontWeight: '500', fontSize: '0.875rem'}}>
+                        ✅ Your current investment alone will meet your retirement goal!
+                      </p>
+                    </div>
+                  )}
                   
                   <div className="analysis-item">
                     <span className="item-label">Current Monthly Savings:</span>
@@ -385,6 +432,16 @@ const RetirementCalculator = () => {
                 
                 <div style={{backgroundColor: '#fff', padding: '0.75rem', borderRadius: '0.375rem', border: '1px solid #e5e7eb'}}>
                   <h4 style={{fontWeight: '700', fontSize: '0.875rem', marginBottom: '0.5rem', color: '#374151'}}>📊 Corpus Projection Analysis</h4>
+                  
+                  {currentInvestment > 0 && (
+                    <div className="analysis-item" style={{fontSize: '0.875rem', color: '#4b5563'}}>
+                      <span className="item-label">Current Investment:</span> ৳{currentInvestment.toLocaleString()}
+                      <span style={{color: '#059669', marginLeft: '0.5rem'}}>
+                        → ৳{corpusResults.currentInvestmentFutureValue.toLocaleString()}
+                      </span>
+                    </div>
+                  )}
+                  
                   <div className="analysis-item">
                     <span className="item-label">Projected Corpus (Current Path):</span>
                     <span style={{
@@ -513,9 +570,11 @@ const RetirementCalculator = () => {
                         <td>
                           {year.isDepleted 
                             ? "❌ Depleted" 
-                            : year.isRetired 
+                            : (year.isRetired 
                               ? "Retired" 
-                              : "Working"}
+                              : (year.isFirstYear 
+                                ? "Working (Starting)"
+                                : "Working"))}
                         </td>
                       </tr>
                     ))}
